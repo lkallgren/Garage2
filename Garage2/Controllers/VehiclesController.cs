@@ -54,7 +54,7 @@ namespace Garage2.Controllers
 
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");     // Ändrades till "Create" för att skapa loopen.
             }
             return View(vehicle);
         }
