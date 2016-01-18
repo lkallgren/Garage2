@@ -53,7 +53,6 @@ namespace Garage2.Models
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(vehicle);
         }
 
