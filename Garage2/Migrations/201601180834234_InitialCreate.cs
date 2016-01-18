@@ -21,7 +21,7 @@ namespace Garage2.Migrations
                         CheckInTime = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-           
+          
         }
         
         public override void Down()
