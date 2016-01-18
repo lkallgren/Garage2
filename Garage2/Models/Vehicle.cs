@@ -17,6 +17,5 @@ namespace Garage2.Models
         public string Color { get; set; }
         public int Wheels { get; set; }
         public DateTime? CheckInTime { get; set; }
-
     }
 }
