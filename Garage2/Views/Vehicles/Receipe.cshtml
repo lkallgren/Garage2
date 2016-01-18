@@ -1,19 +1,14 @@
 ﻿@model Garage2.Models.Vehicle
 
 @{
-    ViewBag.Title = "CheckOut";
+    ViewBag.Title = "Receipe";
 }
 
-<h2>Check out Vehicle</h2> 
-<p>
-    Time is:
-    @DateTime.Now;
- 
-</p>
+@*@DateTime CheckOutTime= new DateTime();*@
+<h2>Details</h2> 
 
-<h3>Are you sure you want CheckOut this vehicle?</h3>
 <div>
-    <h4>Vehicle</h4>
+    <h4>Receipe</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,37 +44,37 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Wheels)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Wheels)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.CheckInTime)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.CheckInTime)
         </dd>
+        @{
+            DateTime CheckOutTime = new DateTime();
+            CheckOutTime = DateTime.Now;
+        <dt>
+            @Html.DisplayNameFor(r=>CheckOutTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(r=>CheckOutTime)
+        </dd>
+            DateTime ParkingTime = new DateTime();
+          //  ParkingTime. = CheckOutTime - Model.CheckInTime;
+        <dt>
+           @Html.DisplayNameFor(r => ParkingTime)
+       </dt>
+       <dd>
+           @Html.DisplayFor(r => ParkingTime)
+       </dd>
+
+
+}
+
+
+
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Check Out" class="btn btn-default" /> |
-            @Html.ActionLink("Back to Garage", "Index")
-        </div>
-    }
 </div>
+<p>
+      @Html.ActionLink("Back to List", "Index")
+</p>
