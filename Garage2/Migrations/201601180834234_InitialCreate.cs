@@ -20,7 +20,7 @@ namespace Garage2.Migrations
                         Wheels = c.Int(nullable: false),
                         CheckInTime = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id); 
           
         }
         
