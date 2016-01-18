@@ -10,14 +10,20 @@ namespace Garage2.Models
     
     public class Vehicle
     {
+        
         public int Id { get; set; }
-         [Required]
+
+        [Required]
         public VType Type { get; set; }
-         [Required]
+
+        [StringLength(10,MinimumLength=4)]
+        [Required]
         public string RegNr { get; set; }
+
         public string Brand { get; set; }
         public string ProdName { get; set; }
-         [Required]
+
+        [Required]
         public string Color { get; set; }
         public int Wheels { get; set; }
         public DateTime? CheckInTime { get; set; }
