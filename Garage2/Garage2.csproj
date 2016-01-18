@@ -121,9 +121,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601180834234_InitialCreate.cs" />
-    <Compile Include="Migrations\201601180834234_InitialCreate.Designer.cs">
-      <DependentUpon>201601180834234_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601181124556_NewInit.cs" />
+    <Compile Include="Migrations\201601181124556_NewInit.Designer.cs">
+      <DependentUpon>201601181124556_NewInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Garage2Context.cs" />
@@ -184,8 +184,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601180834234_InitialCreate.resx">
-      <DependentUpon>201601180834234_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601181124556_NewInit.resx">
+      <DependentUpon>201601181124556_NewInit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

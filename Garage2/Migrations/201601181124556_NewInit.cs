@@ -3,7 +3,7 @@ namespace Garage2.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class NewInit : DbMigration
     {
         public override void Up()
         {
@@ -18,10 +18,10 @@ namespace Garage2.Migrations
                         ProdName = c.String(),
                         Color = c.String(),
                         Wheels = c.Int(nullable: false),
-                        CheckInTime = c.DateTime(nullable: false),
+                        CheckInTime = c.DateTime(),
                     })
-                .PrimaryKey(t => t.Id); 
-          
+                .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()
