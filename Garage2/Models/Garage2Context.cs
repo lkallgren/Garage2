@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
+
 namespace Garage2.Models
 {
     public class Garage2Context : DbContext

@@ -6,8 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Garage2.Models;
 
-namespace Garage2.Models
+namespace Garage2.Controllers
 {
     public class VehiclesController : Controller
     {
