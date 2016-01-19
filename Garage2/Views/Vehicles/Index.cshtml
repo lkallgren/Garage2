@@ -13,17 +13,17 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+           @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm })
         </th>
         <th>
             @Html.ActionLink("RegNr", "Index", new { sortOrder = ViewBag.RegNrSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brand)
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })
         </th>
       
         <th>
-            @Html.DisplayNameFor(model => model.CheckInTime)
+            @Html.ActionLink("CheckinTime", "Index", new { sortOrder = ViewBag.CheckinTimeSortParm })
         </th>
         <th></th>
     </tr>

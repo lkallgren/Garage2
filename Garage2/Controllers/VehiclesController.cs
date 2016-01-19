@@ -22,9 +22,10 @@ namespace Garage2.Controllers
             List<Vehicle> sortVehicles = db.Vehicles.ToList();
 
             ViewBag.RegNrSortParm = String.IsNullOrEmpty(sortOrder) ? "regnr_desc" : "";
-            //ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
-            //ViewBag.BrandSortParm = String.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
-           //ViewBag.DateSortParm = sortOrder == "CheckinTime" ? "date_desc" : "Date";
+            ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
+            ViewBag.BrandSortParm = String.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
+            ViewBag.CheckinTimeSortParm = sortOrder == "CheckinTime" ? "checkintime_desc" : "Date";
+            
 
              var vehicles = from v in db.Vehicles
                   select v;
@@ -33,12 +34,18 @@ namespace Garage2.Controllers
                         case "regnr_desc":
                             vehicles = vehicles.OrderByDescending(v => v.RegNr);
                             break;
-                       //case "Date":
-                       //      vehicles = vehicles.OrderBy(s => s.EnrollmentDate);
-                       //     break;
-                       // case "date_desc":
-                       //     vehicles = vehicles.OrderByDescending(s => s.EnrollmentDate);
-                       //     break;
+                        case "type_desc":
+                            vehicles = vehicles.OrderByDescending(v => v.RegNr);
+                            break;
+                        case "brand_desc":
+                            vehicles = vehicles.OrderByDescending(v => v.Brand);
+                            break;
+                        case "Date":
+                            vehicles = vehicles.OrderBy(v => v.CheckInTime);
+                            break;
+                        case "checkin_desc":
+                            vehicles = vehicles.OrderByDescending(v => v.CheckInTime);
+                            break;
                         default:
                             vehicles = vehicles.OrderBy(v => v.Type);
                             break;
