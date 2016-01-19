@@ -55,7 +55,10 @@
             TimeSpan? ParkingTime = new TimeSpan();
                         
             ParkingTime = CheckOutTime - Model.CheckInTime;
-            int totHours = Convert.ToInt32(ParkingTime.Value.TotalHours);
+           
+            double totH = ParkingTime.Value.TotalHours;
+            int totHours = Convert.ToInt32(Math.Truncate(totH));
+            
             
             var result = string.Format("{0:D2}:{1:D2}",  totHours, ParkingTime.Value.Minutes);
             
