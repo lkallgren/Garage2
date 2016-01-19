@@ -27,45 +27,60 @@ namespace Garage2.Controllers
             {
                 vehicle = vehicle.Where(s => s.RegNr.Contains(searchString));
             }
-
-            
-          ////Sort
-
-          //  ViewBag.RegNrSortParm = String.IsNullOrEmpty(searchString) ? "regnr_desc" : "";
-          //  ViewBag.TypeSortParm = String.IsNullOrEmpty(searchString) ? "type_desc" : "";
-          //  ViewBag.BrandSortParm = String.IsNullOrEmpty(searchString) ? "brand_desc" : "";
-          //  ViewBag.CheckinTimeSortParm = searchString == "CheckinTime" ? "checkintime_desc" : "Date";
-
-
-          //  var vehicles = from v in db.Vehicles
-          //                 select v;
-          //  switch (searchString)
-          //  {
-          //      case "regnr_desc":
-          //          vehicles = vehicles.OrderByDescending(v => v.RegNr);
-          //          break;
-          //      case "type_desc":
-          //          vehicles = vehicles.OrderByDescending(v => v.RegNr);
-          //          break;
-          //      case "brand_desc":
-          //          vehicles = vehicles.OrderByDescending(v => v.Brand);
-          //          break;
-          //      case "Date":
-          //          vehicles = vehicles.OrderBy(v => v.CheckInTime);
-          //          break;
-          //      case "checkin_desc":
-          //          vehicles = vehicles.OrderByDescending(v => v.CheckInTime);
-          //          break;
-          //      default:
-          //          vehicles = vehicles.OrderBy(v => v.Type);
-          //          break;
-          //  }
-
             return View(vehicle);
+            
+          //Sort start
 
+        //  public ActionResult Index(string sortOrder)
+        //{
+        //    List<Vehicle> sortVehicles = db.Vehicles.ToList();
+
+        //    ViewBag.TypeSortParm = sortOrder == "type_desc" ? "Type" : "type_desc";
+        //    ViewBag.RegNrSortParm = sortOrder == "regnr_desc" ? "RegNr" : "regnr_desc";
+        //    ViewBag.BrandSortParm = sortOrder == "brand_desc" ? "Brand" : "brand_desc";
+        //    ViewBag.CheckinTimeSortParm = sortOrder == "checkintime_desc" ? "Date" : "checkintime_desc";
+            
+
+        //     var vehicles = from v in db.Vehicles
+        //          select v;
+        //            switch (sortOrder)
+        //            {
+        //                case "regnr_desc":
+        //                    vehicles = vehicles.OrderByDescending(v => v.RegNr);
+        //                    break;
+        //                case "RegNr":
+        //                    vehicles = vehicles.OrderBy(v => v.RegNr);
+        //                    break;
+        //                case "type_desc":
+        //                    vehicles = vehicles.OrderByDescending(v => v.Type);
+        //                    break;
+        //                case "Type":
+        //                    vehicles = vehicles.OrderBy(v => v.Type);
+        //                    break;
+        //                case "brand_desc":
+        //                    vehicles = vehicles.OrderByDescending(v => v.Brand);
+        //                    break;
+        //                case "Brand":
+        //                    vehicles = vehicles.OrderBy(v => v.Brand);
+        //                    break;
+        //                case "checkintime_desc":
+        //                    vehicles = vehicles.OrderByDescending(v => v.CheckInTime);
+        //                    break;
+        //                case "Date":
+        //                    vehicles = vehicles.OrderBy(v => v.CheckInTime);
+        //                    break;
+        //                default:
+        //                    vehicles = vehicles.OrderBy(v => v.Type);
+        //                    break;
+        //            }
+
+        //    return View(vehicles);
+
+       
         }
 
         // GET: Vehicles/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
