@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Garage2.Models;
 
+
 namespace Garage2.Controllers
 {
     public class VehiclesController : Controller
@@ -16,9 +17,34 @@ namespace Garage2.Controllers
         private Vehicle tmpVehicle;
 
         // GET: Vehicles
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Vehicles.ToList());
+            List<Vehicle> sortVehicles = db.Vehicles.ToList();
+
+            ViewBag.RegNrSortParm = String.IsNullOrEmpty(sortOrder) ? "regnr_desc" : "";
+            //ViewBag.TypeSortParm = String.IsNullOrEmpty(sortOrder) ? "type_desc" : "";
+            //ViewBag.BrandSortParm = String.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
+           //ViewBag.DateSortParm = sortOrder == "CheckinTime" ? "date_desc" : "Date";
+
+             var vehicles = from v in db.Vehicles
+                  select v;
+                    switch (sortOrder)
+                    {
+                        case "regnr_desc":
+                            vehicles = vehicles.OrderByDescending(v => v.RegNr);
+                            break;
+                       //case "Date":
+                       //      vehicles = vehicles.OrderBy(s => s.EnrollmentDate);
+                       //     break;
+                       // case "date_desc":
+                       //     vehicles = vehicles.OrderByDescending(s => s.EnrollmentDate);
+                       //     break;
+                        default:
+                            vehicles = vehicles.OrderBy(v => v.Type);
+                            break;
+                    }
+
+            return View(vehicles);
         }
 
         // GET: Vehicles/Details/5
