@@ -18,8 +18,15 @@ namespace Garage2.Controllers
 
         // GET: Vehicles
 
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string sortOrder)
         {
+
+            ViewBag.TypeSortParm = sortOrder == "type_desc" ? "type_asc" : "type_desc";
+            ViewBag.RegNrSortParm = sortOrder == "regnr_desc" ? "regnr_asc" : "regnr_desc";
+            ViewBag.BrandSortParm = sortOrder == "brand_desc" ? "brand_asc" : "brand_desc";
+            ViewBag.CheckinTimeSortParm = sortOrder == "checkintime_desc" ? "checkintime_asc" : "checkintime_desc";
+
+
             var vehicle = from v in db.Vehicles
                           select v;
 
@@ -27,54 +34,39 @@ namespace Garage2.Controllers
             {
                 vehicle = vehicle.Where(s => s.RegNr.Contains(searchString));
             }
+
+            switch (sortOrder)
+            {
+                case "regnr_desc":
+                    vehicle = vehicle.OrderByDescending(v => v.RegNr);
+                    break;
+                case "regnr_asc":
+                    vehicle = vehicle.OrderBy(v => v.RegNr);
+                    break;
+                case "type_desc":
+                    vehicle = vehicle.OrderByDescending(v => v.Type);
+                    break;
+                case "type_asc":
+                    vehicle = vehicle.OrderBy(v => v.Type);
+                    break;
+                case "brand_desc":
+                    vehicle = vehicle.OrderByDescending(v => v.Brand);
+                    break;
+                case "brand_asc":
+                    vehicle = vehicle.OrderBy(v => v.Brand);
+                    break;
+                case "checkintime_desc":
+                    vehicle = vehicle.OrderByDescending(v => v.CheckInTime);
+                    break;
+                case "checkintime_asc":
+                    vehicle = vehicle.OrderBy(v => v.CheckInTime);
+                    break;
+                default:
+                    vehicle = vehicle.OrderBy(v => v.Type);
+                    break;
+            }
+
             return View(vehicle);
-            
-          //Sort start
-
-        //  public ActionResult Index(string sortOrder)
-        //{
-        //    List<Vehicle> sortVehicles = db.Vehicles.ToList();
-
-        //    ViewBag.TypeSortParm = sortOrder == "type_desc" ? "Type" : "type_desc";
-        //    ViewBag.RegNrSortParm = sortOrder == "regnr_desc" ? "RegNr" : "regnr_desc";
-        //    ViewBag.BrandSortParm = sortOrder == "brand_desc" ? "Brand" : "brand_desc";
-        //    ViewBag.CheckinTimeSortParm = sortOrder == "checkintime_desc" ? "Date" : "checkintime_desc";
-            
-
-        //     var vehicles = from v in db.Vehicles
-        //          select v;
-        //            switch (sortOrder)
-        //            {
-        //                case "regnr_desc":
-        //                    vehicles = vehicles.OrderByDescending(v => v.RegNr);
-        //                    break;
-        //                case "RegNr":
-        //                    vehicles = vehicles.OrderBy(v => v.RegNr);
-        //                    break;
-        //                case "type_desc":
-        //                    vehicles = vehicles.OrderByDescending(v => v.Type);
-        //                    break;
-        //                case "Type":
-        //                    vehicles = vehicles.OrderBy(v => v.Type);
-        //                    break;
-        //                case "brand_desc":
-        //                    vehicles = vehicles.OrderByDescending(v => v.Brand);
-        //                    break;
-        //                case "Brand":
-        //                    vehicles = vehicles.OrderBy(v => v.Brand);
-        //                    break;
-        //                case "checkintime_desc":
-        //                    vehicles = vehicles.OrderByDescending(v => v.CheckInTime);
-        //                    break;
-        //                case "Date":
-        //                    vehicles = vehicles.OrderBy(v => v.CheckInTime);
-        //                    break;
-        //                default:
-        //                    vehicles = vehicles.OrderBy(v => v.Type);
-        //                    break;
-        //            }
-
-        //    return View(vehicles);
 
        
         }
