@@ -17,7 +17,7 @@ namespace Garage2.Controllers
 
         // GET: Vehicles
 
-        public ActionResult Index(string searchString)
+        public ActionResult Index2Sökning(string searchString)
         {
             var vehicle = from v in db.Vehicles
                          select v;
