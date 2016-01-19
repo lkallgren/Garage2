@@ -8,7 +8,17 @@
 
 <p>
     @Html.ActionLink("Checkin to Garage", "Create")<br />
-    @Html.ActionLink("Search", "Edit", new { Id = 2})
+
+    @using (Html.BeginForm())
+    {
+    <p>
+        Find by RegNr: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+    }
+
+
+    @*@Html.ActionLink("Search", "Edit", new { Id = 2})*@
 </p>
 <table class="table">
     <tr>

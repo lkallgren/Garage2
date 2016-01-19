@@ -16,10 +16,24 @@ namespace Garage2.Controllers
         private Vehicle tmpVehicle;
 
         // GET: Vehicles
-        public ActionResult Index()
+
+        public ActionResult Index(string searchString)
         {
-            return View(db.Vehicles.ToList());
+            var vehicle = from v in db.Vehicles
+                         select v;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vehicle = vehicle.Where(s => s.RegNr.Contains(searchString));
+            }
+
+            return View(vehicle);
         }
+
+        //public ActionResult Index()
+        //{
+        //    return View(db.Vehicles.ToList());
+        //}
 
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
