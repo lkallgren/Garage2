@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Garage2.Models;
 
+
 namespace Garage2.Controllers
 {
     public class VehiclesController : Controller
@@ -17,23 +18,52 @@ namespace Garage2.Controllers
 
         // GET: Vehicles
 
-        public ActionResult Index2Sökning(string searchString)
+        public ActionResult Index(string searchString)
         {
             var vehicle = from v in db.Vehicles
-                         select v;
+                          select v;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 vehicle = vehicle.Where(s => s.RegNr.Contains(searchString));
             }
 
-            return View(vehicle);
-        }
+            
+          ////Sort
 
-        //public ActionResult Index()
-        //{
-        //    return View(db.Vehicles.ToList());
-        //}
+          //  ViewBag.RegNrSortParm = String.IsNullOrEmpty(searchString) ? "regnr_desc" : "";
+          //  ViewBag.TypeSortParm = String.IsNullOrEmpty(searchString) ? "type_desc" : "";
+          //  ViewBag.BrandSortParm = String.IsNullOrEmpty(searchString) ? "brand_desc" : "";
+          //  ViewBag.CheckinTimeSortParm = searchString == "CheckinTime" ? "checkintime_desc" : "Date";
+
+
+          //  var vehicles = from v in db.Vehicles
+          //                 select v;
+          //  switch (searchString)
+          //  {
+          //      case "regnr_desc":
+          //          vehicles = vehicles.OrderByDescending(v => v.RegNr);
+          //          break;
+          //      case "type_desc":
+          //          vehicles = vehicles.OrderByDescending(v => v.RegNr);
+          //          break;
+          //      case "brand_desc":
+          //          vehicles = vehicles.OrderByDescending(v => v.Brand);
+          //          break;
+          //      case "Date":
+          //          vehicles = vehicles.OrderBy(v => v.CheckInTime);
+          //          break;
+          //      case "checkin_desc":
+          //          vehicles = vehicles.OrderByDescending(v => v.CheckInTime);
+          //          break;
+          //      default:
+          //          vehicles = vehicles.OrderBy(v => v.Type);
+          //          break;
+          //  }
+
+            return View(vehicle);
+
+        }
 
         // GET: Vehicles/Details/5
         public ActionResult Details(int? id)
@@ -118,7 +148,7 @@ namespace Garage2.Controllers
                 return HttpNotFound();
             }
             return View(vehicle);
-            
+
         }
 
         // POST: Vehicles/Delete/5
@@ -131,8 +161,8 @@ namespace Garage2.Controllers
 
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            
-           // return RedirectToAction("Index");
+
+            // return RedirectToAction("Index");
             return RedirectToAction("Receipe", tmpVehicle);
         }
 
