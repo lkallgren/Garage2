@@ -18,14 +18,14 @@ namespace Garage2.Controllers
 
         // GET: Vehicles
 
-        public ActionResult Index(string searchString, string sortOrder)
+        public ActionResult Index(string searchString, string sortOrder )
         {
 
             ViewBag.TypeSortParm = sortOrder == "type_desc" ? "type_asc" : "type_desc";
             ViewBag.RegNrSortParm = sortOrder == "regnr_desc" ? "regnr_asc" : "regnr_desc";
             ViewBag.BrandSortParm = sortOrder == "brand_desc" ? "brand_asc" : "brand_desc";
             ViewBag.CheckinTimeSortParm = sortOrder == "checkintime_desc" ? "checkintime_asc" : "checkintime_desc";
-
+            ViewBag.ParkingTimeSortParm = sortOrder == "parkingtime_desc" ? "parkingtime_asc" : "parkingtime_desc";
 
             var vehicle = from v in db.Vehicles
                           select v;
@@ -61,6 +61,13 @@ namespace Garage2.Controllers
                 case "checkintime_asc":
                     vehicle = vehicle.OrderBy(v => v.CheckInTime);
                     break;
+                case "parkingtime_desc":
+                    vehicle = vehicle.OrderByDescending(v => v.CheckInTime);
+                    break;
+                case "parkingtime_asc":
+                    vehicle = vehicle.OrderBy(v => v.CheckInTime);
+                    break;
+
                 default:
                     vehicle = vehicle.OrderBy(v => v.Type);
                     break;
