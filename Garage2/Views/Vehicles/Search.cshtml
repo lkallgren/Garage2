@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Garage2.Models.Vehicle>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<form method="get">
+    RegisterNr.: <input type="search" name="searchReg" />
+    <input type="submit" value="Search"/>
+</form>
+
+@foreach (var vehicle in Model)
+{
+    <div>
+        <h4>@vehicle.RegNr</h4>
+    <div>
+    @vehicle.Type,
+    @vehicle.Brand,
+        @vehicle.ProdName,
+        @vehicle.Color,
+        @vehicle.Wheels,
+        @vehicle.CheckInTime
+        </div>
+        </div>
+                 
+}
