@@ -13,6 +13,7 @@ namespace Garage2.Controllers
     public class VehiclesController : Controller
     {
         private Garage2Context db = new Garage2Context();
+        private Vehicle tmpVehicle;
 
         // GET: Vehicles
         public ActionResult Index()
@@ -103,6 +104,7 @@ namespace Garage2.Controllers
                 return HttpNotFound();
             }
             return View(vehicle);
+            
         }
 
         // POST: Vehicles/Delete/5
@@ -111,10 +113,20 @@ namespace Garage2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Vehicle vehicle = db.Vehicles.Find(id);
+            tmpVehicle = vehicle;
+
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            
+           // return RedirectToAction("Index");
+            return RedirectToAction("Receipe", tmpVehicle);
         }
+
+        public ActionResult Receipe(Vehicle tmp)
+        {
+            return View(tmp);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
