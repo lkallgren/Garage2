@@ -52,14 +52,19 @@
         @{
             DateTime CheckOutTime = new DateTime();
             CheckOutTime = DateTime.Now;
+            TimeSpan? ParkingTime = new TimeSpan();
+    
+                      
+            
+            ParkingTime = CheckOutTime - Model.CheckInTime;
+         }
         <dt>
             @Html.DisplayNameFor(r=>CheckOutTime)
         </dt>
         <dd>
             @Html.DisplayFor(r=>CheckOutTime)
         </dd>
-            DateTime ParkingTime = new DateTime();
-          //  ParkingTime. = CheckOutTime - Model.CheckInTime;
+           
         <dt>
            @Html.DisplayNameFor(r => ParkingTime)
        </dt>
@@ -68,7 +73,7 @@
        </dd>
 
 
-}
+
 
 
 
