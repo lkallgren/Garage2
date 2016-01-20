@@ -151,11 +151,11 @@ namespace Garage2.Controllers
             db.SaveChanges();
 
 
-            return RedirectToAction("Receipe", vehicle);
+            return RedirectToAction("Receipt", vehicle);
             
         }
 
-        public ActionResult Receipe(Vehicle vehicle)
+        public ActionResult Receipt(Vehicle vehicle)
         { 
 
             DateTime CheckOutTime = DateTime.Now;
