@@ -7,23 +7,36 @@
 <h2>The Garage</h2>
 
 <p>
-    @Html.ActionLink("Checkin to Garage", "Create")
-</p>
+    @Html.ActionLink("Checkin to Garage", "Create")<br />
+
+    @using (Html.BeginForm())
+    {
+    <p>
+        Find by RegNr: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+    }
+
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Type)
+           @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, searchString=ViewBag.SearchString })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RegNr)
+            @Html.ActionLink("RegNr", "Index", new { sortOrder = ViewBag.RegNrSortParm, searchString = ViewBag.SearchString })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brand)
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm, searchString = ViewBag.SearchString })
         </th>
       
         <th>
-            @Html.DisplayNameFor(model => model.CheckInTime)
+            @Html.ActionLink("CheckinTime", "Index", new { sortOrder = ViewBag.CheckinTimeSortParm, searchString = ViewBag.SearchString })
         </th>
+        <th>
+            @Html.ActionLink("ParkingTime", "Index", new { sortOrder = ViewBag.ParkingTimeSortParm, searchString = ViewBag.SearchString })
+        </th>
+
         <th></th>
     </tr>
 
@@ -43,9 +56,24 @@
             @Html.DisplayFor(modelItem => item.CheckInTime)
         </td>
         <td>
-            @Html.ActionLink("Search", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Checkout", "Delete", new { id=item.Id })
+            @{
+           
+            TimeSpan? ParkingTime = new TimeSpan();
+
+            ParkingTime = DateTime.Now - item.CheckInTime;
+            int totHours = Convert.ToInt32(ParkingTime.Value.TotalHours);
+
+            var result = string.Format("{0:D2}:{1:D2}",  totHours, ParkingTime.Value.Minutes);
+                     
+            }
+
+            @Html.DisplayFor(modelItem => result )
+        </td>
+
+        <td>
+            @*@Html.ActionLink("Search", "Edit", new { id = item.Id }) |*@
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Checkout", "Delete", new { id = item.Id })
         </td>
     </tr>
 }
