@@ -21,20 +21,20 @@
 <table class="table">
     <tr>
         <th>
-           @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm })
+           @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.TypeSortParm, searchString=ViewBag.SearchString })
         </th>
         <th>
-            @Html.ActionLink("RegNr", "Index", new { sortOrder = ViewBag.RegNrSortParm })
+            @Html.ActionLink("RegNr", "Index", new { sortOrder = ViewBag.RegNrSortParm, searchString = ViewBag.SearchString })
         </th>
         <th>
-            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm, searchString = ViewBag.SearchString })
         </th>
       
         <th>
-            @Html.ActionLink("CheckinTime", "Index", new { sortOrder = ViewBag.CheckinTimeSortParm })
+            @Html.ActionLink("CheckinTime", "Index", new { sortOrder = ViewBag.CheckinTimeSortParm, searchString = ViewBag.SearchString })
         </th>
         <th>
-            @Html.ActionLink("ParkingTime", "Index", new { sortOrder = ViewBag.ParkingTimeSortParm })
+            @Html.ActionLink("ParkingTime", "Index", new { sortOrder = ViewBag.ParkingTimeSortParm, searchString = ViewBag.SearchString })
         </th>
 
         <th></th>
