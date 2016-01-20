@@ -173,16 +173,41 @@ namespace Garage2.Controllers
             Vehicle vehicle = db.Vehicles.Find(id);
             tmpVehicle = vehicle;
 
+
+      
+
+            // return RedirectToAction("Index");
+
+
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
 
-            // return RedirectToAction("Index");
-            return RedirectToAction("Receipe", tmpVehicle);
+
+            return RedirectToAction("Receipe", vehicle);
+            
         }
 
-        public ActionResult Receipe(Vehicle tmp)
-        {
-            return View(tmp);
+        public ActionResult Receipe(Vehicle vehicle)
+        { 
+
+            DateTime CheckOutTime = DateTime.Now;
+            TimeSpan? ParkingTime = new TimeSpan();
+
+            ParkingTime = CheckOutTime - vehicle.CheckInTime;
+
+            double totH = ParkingTime.Value.TotalHours;
+            int totHours = Convert.ToInt32(Math.Truncate(totH));
+
+            var result = string.Format("{0:D2}:{1:D2}", totHours, ParkingTime.Value.Minutes);
+
+            double pay = ParkingTime.Value.TotalHours * 60;
+            string Payment = String.Format("{0:0}", pay);
+
+            ViewBag.CheckOutTime = CheckOutTime;
+            ViewBag.Payment = Payment;
+            ViewBag.ParkingTime = result;
+
+            return View(vehicle);
         }
 
 

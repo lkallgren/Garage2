@@ -49,42 +49,25 @@
         <dd>
             @Html.DisplayFor(model => model.CheckInTime)
         </dd>
-        @{
-            DateTime CheckOutTime = new DateTime();
-            CheckOutTime = DateTime.Now;
-            TimeSpan? ParkingTime = new TimeSpan();
-                        
-            ParkingTime = CheckOutTime - Model.CheckInTime;
-           
-            double totH = ParkingTime.Value.TotalHours;
-            int totHours = Convert.ToInt32(Math.Truncate(totH));
-            
-            
-            var result = string.Format("{0:D2}:{1:D2}",  totHours, ParkingTime.Value.Minutes);
-            
-            double pay = ParkingTime.Value.TotalHours*60;
-            string Payment = String.Format("{0:0}", pay);
-            
-         }
-        <dt>
-            @Html.DisplayNameFor(r=>CheckOutTime)
+       <dt>
+           CheckOutTime
         </dt>
         <dd>
-            @Html.DisplayFor(r=>CheckOutTime)
+            @ViewBag.CheckOutTime
         </dd>
            
         <dt>
-           @Html.DisplayNameFor(r => ParkingTime)
+           ParkingTime
        </dt>
        <dd>
-           @Html.DisplayFor(r => result)
+           @ViewBag.ParkingTime
        </dd>
         <dt>
-            @Html.DisplayNameFor(r => Payment)
+           Payment
         </dt>
         <dd>
             <p>
-                @Html.DisplayFor(r => Payment)
+                @ViewBag.Payment
                 Kronor. Price/hour is 60 kr.
             </p>
          
