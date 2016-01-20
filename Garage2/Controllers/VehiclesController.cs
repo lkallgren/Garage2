@@ -26,6 +26,7 @@ namespace Garage2.Controllers
             ViewBag.BrandSortParm = sortOrder == "brand_desc" ? "brand_asc" : "brand_desc";
             ViewBag.CheckinTimeSortParm = sortOrder == "checkintime_desc" ? "checkintime_asc" : "checkintime_desc";
             ViewBag.ParkingTimeSortParm = sortOrder == "parkingtime_desc" ? "parkingtime_asc" : "parkingtime_desc";
+            ViewBag.SearchString = searchString;
 
             var vehicle = from v in db.Vehicles
                           select v;
