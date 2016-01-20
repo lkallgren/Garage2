@@ -174,9 +174,6 @@ namespace Garage2.Controllers
             Vehicle vehicle = db.Vehicles.Find(id);
             tmpVehicle = vehicle;
 
-
-      
-
             // return RedirectToAction("Index");
 
 
@@ -209,6 +206,7 @@ namespace Garage2.Controllers
             ViewBag.ParkingTime = result;
 
             return View(vehicle);
+
         }
 
 
