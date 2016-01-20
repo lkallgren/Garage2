@@ -58,16 +58,18 @@
         <td>
             @{
            
-            TimeSpan? ParkingTime = new TimeSpan();
+                TimeSpan? ParkingTime = new TimeSpan();
 
-            ParkingTime = DateTime.Now - item.CheckInTime;
-            int totHours = Convert.ToInt32(ParkingTime.Value.TotalHours);
+                ParkingTime = DateTime.Now - item.CheckInTime;
+                double totH = ParkingTime.Value.TotalHours;
+                int totHours = Convert.ToInt32(Math.Truncate(totH));                
 
-            var result = string.Format("{0:D2}:{1:D2}",  totHours, ParkingTime.Value.Minutes);
+                var result = string.Format("{0:D2}:{1:D2}",  totHours, ParkingTime.Value.Minutes);
                      
             }
 
             @Html.DisplayFor(modelItem => result )
+          
         </td>
 
         <td>
