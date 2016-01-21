@@ -124,7 +124,7 @@ namespace Garage2.Controllers
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
 
-                TempData["SetConfirmPark"] = "Your vehicle (" + vehicle.RegNr + ") is now parked in the garage.";
+                TempData["SetConfirmPark"] = "Your vehicle with RegNr: " + vehicle.RegNr + " is now parked in the garage.";
 
                 return RedirectToAction("Create");     // Ändrades till "Create" för att skapa loopen.
             }

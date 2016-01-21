@@ -25,6 +25,8 @@ namespace Garage2.Models
 
         [Required]
         public string Color { get; set; }
+
+        [Range (0,9999)]
         public int Wheels { get; set; }
         public DateTime? CheckInTime { get; set; }
     }
