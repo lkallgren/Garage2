@@ -98,6 +98,15 @@ namespace Garage2.Controllers
         // GET: Vehicles/Create
         public ActionResult Create()
         {
+            if (TempData["SetConfirmPark"] != null)
+            {
+                ViewBag.ConfirmPark = TempData["SetConfirmPark"];
+            }
+            else
+            {
+                ViewBag.ConfirmPark = "Please enter your vehicle details.";
+            }
+
             return View();
         }
 
@@ -114,6 +123,9 @@ namespace Garage2.Controllers
 
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
+
+                TempData["SetConfirmPark"] = "Your vehicle (" + vehicle.RegNr + ") is now parked in the garage.";
+
                 return RedirectToAction("Create");     // Ändrades till "Create" för att skapa loopen.
             }
             return View(vehicle);
