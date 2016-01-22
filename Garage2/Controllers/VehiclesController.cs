@@ -14,36 +14,19 @@ namespace Garage2.Controllers
     public class VehiclesController : Controller
     {
         public Garage2Context db = new Garage2Context();
-        private Vehicle tmpVehicle;
 
         int AddToFirstEmptySpace(VType vType) // returnera första lediga plats med eventuella nödvändiga platser extra efter varandra
         {
             Garage gar = new Garage(1000);
             var vehiclesParked = (from v in db.Vehicles
-                                 where v.ParkNr>0
-                          select v).ToList();
-
-            var vehiclesUnParked = (from v in db.Vehicles
-                                   where v.ParkNr<=0
-                          select v).ToList();
+                                  select v).ToList();
 
 
 
             foreach (var veh in vehiclesParked)
-	        {
-              //  if (veh.ParkNr>0 && veh.ParkNr<=gar.Max)
+            {
                 gar.AddToParkNr(veh.ParkNr);  //om platsen redan finns !!??
                 //veh.ParkNr=0; //går ju inte
-
-	        }
-            foreach (var veh in vehiclesUnParked)
-            {
-                int p = gar.Add();
-                if (p > 0)
-                {
-                    db.Vehicles.Where(v => v.Id == veh.Id).FirstOrDefault().ParkNr = (Int32)p;
-                    db.SaveChanges();
-                }
 
             }
             
@@ -51,43 +34,7 @@ namespace Garage2.Controllers
         }
 
 
-        bool DeleteFromGarage(Vehicle vehicle)
-        {
-
-            Garage gar = new Garage(1000);
-            var vehiclesParked = (from v in db.Vehicles
-                                  where v.ParkNr > 0
-                                  select v).ToList();
-
-            var vehiclesUnParked = (from v in db.Vehicles
-                                    where v.ParkNr <= 0
-                                    select v).ToList();
-
-
-
-            foreach (var veh in vehiclesParked)
-            {
-                //  if (veh.ParkNr>0 && veh.ParkNr<=gar.Max)
-                if (!gar.AddToParkNr(veh.ParkNr)) //om platsen redan finns !!??
-                ;//veh.ParkNr=0; //går ju inte
-
-            }
-            foreach (var veh in vehiclesUnParked)
-            {
-                int p = gar.Add();
-                if (p > 0)
-                {
-                    db.Vehicles.Where(v => v.Id == veh.Id).FirstOrDefault().ParkNr = (Int32)p;
-                    db.SaveChanges();
-                }
-
-            }
-
-            int parkNr = db.Vehicles.Where(v => v.Id == vehicle.Id).FirstOrDefault().ParkNr;
-            return gar.Remove(parkNr); // ta bort
-        }
-
-
+ 
 
         // GET: Vehicles
 
@@ -236,11 +183,8 @@ namespace Garage2.Controllers
 
             
             Vehicle vehicle = db.Vehicles.Find(id);
-           // tmpVehicle = vehicle;
-
-            // return RedirectToAction("Index");
            
-            DeleteFromGarage(vehicle);
+           // DeleteFromGarage(vehicle);
 
             db.Vehicles.Remove(vehicle);
             db.SaveChanges();
