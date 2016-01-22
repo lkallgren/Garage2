@@ -13,8 +13,43 @@ namespace Garage2.Controllers
 {
     public class VehiclesController : Controller
     {
-        private Garage2Context db = new Garage2Context();
+        public Garage2Context db = new Garage2Context();
         private Vehicle tmpVehicle;
+
+        int AddToFirstEmptySpace(VType vType) // returnera första lediga plats med eventuella nödvändiga platser extra efter varandra
+        {
+            Garage gar = new Garage(1000);
+            var vehiclesParked = (from v in db.Vehicles
+                                 where v.ParkNr>0
+                          select v).ToList();
+
+            var vehiclesUnParked = (from v in db.Vehicles
+                                   where v.ParkNr<=0
+                          select v).ToList();
+
+
+
+            foreach (var veh in vehiclesParked)
+	        {
+              //  if (veh.ParkNr>0 && veh.ParkNr<=gar.Max)
+                    if (! gar.AddToParkNr(veh.ParkNr)) //om platsen redan finns !!??
+                        ;//veh.ParkNr=0; //går ju inte
+
+	        }
+            foreach (var veh in vehiclesUnParked)
+            {
+                int p = gar.Add();
+                if (p > 0)
+                {
+                    db.Vehicles.Where(v => v.Id == veh.Id).FirstOrDefault().ParkNr = (Int32)p;
+                    db.SaveChanges();
+                }
+
+            }
+            
+            return gar.Add();
+        }
+ 
 
         // GET: Vehicles
 
@@ -120,11 +155,11 @@ namespace Garage2.Controllers
             if (ModelState.IsValid)
             {
                 vehicle.CheckInTime = DateTime.Now;
-
+                vehicle.ParkNr = AddToFirstEmptySpace(vehicle.Type);
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
 
-                TempData["SetConfirmPark"] = "Your vehicle with RegNr: " + vehicle.RegNr + " is now parked in the garage.";
+                TempData["SetConfirmPark"] = "Your " + vehicle.Type + " with regnr: " + vehicle.RegNr + " is now parked in the garage.";
 
                 return RedirectToAction("Create");     // Ändrades till "Create" för att skapa loopen.
             }
@@ -163,11 +198,11 @@ namespace Garage2.Controllers
             db.SaveChanges();
 
 
-            return RedirectToAction("Receipe", vehicle);
+            return RedirectToAction("Receipt", vehicle);
             
         }
 
-        public ActionResult Receipe(Vehicle vehicle)
+        public ActionResult Receipt(Vehicle vehicle)
         { 
 
             DateTime CheckOutTime = DateTime.Now;
