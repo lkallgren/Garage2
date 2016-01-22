@@ -4,16 +4,15 @@
     ViewBag.Title = "CheckOut";
 }
 
-<h2>Check out Vehicle</h2> 
+<h2>Check out Vehicle</h2>
 <p>
     Time is:
     @DateTime.Now;
- 
+
 </p>
 
 <h3>Are you sure you want CheckOut this vehicle?</h3>
 <div>
-    <h4>Vehicle</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -74,12 +73,14 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
-            <input type="submit" value="Check Out" class="btn btn-default" /> |
-            @Html.ActionLink("Back to Garage", "Index")
+            <input type="submit" value="Check Out" class="btn btn-default" />
         </div>
     }
 </div>
+<p>
+    @Html.ActionLink("Back to Garage", "Index")
+</p>
