@@ -32,8 +32,8 @@ namespace Garage2.Controllers
             foreach (var veh in vehiclesParked)
 	        {
               //  if (veh.ParkNr>0 && veh.ParkNr<=gar.Max)
-                    if (! gar.AddToParkNr(veh.ParkNr)) //om platsen redan finns !!??
-                        ;//veh.ParkNr=0; //går ju inte
+                gar.AddToParkNr(veh.ParkNr);  //om platsen redan finns !!??
+                //veh.ParkNr=0; //går ju inte
 
 	        }
             foreach (var veh in vehiclesUnParked)
@@ -69,7 +69,7 @@ namespace Garage2.Controllers
             {
                 //  if (veh.ParkNr>0 && veh.ParkNr<=gar.Max)
                 if (!gar.AddToParkNr(veh.ParkNr)) //om platsen redan finns !!??
-                    ;//veh.ParkNr=0; //går ju inte
+                ;//veh.ParkNr=0; //går ju inte
 
             }
             foreach (var veh in vehiclesUnParked)
@@ -99,6 +99,7 @@ namespace Garage2.Controllers
             ViewBag.BrandSortParm = sortOrder == "brand_desc" ? "brand_asc" : "brand_desc";
             ViewBag.CheckinTimeSortParm = sortOrder == "checkintime_desc" ? "checkintime_asc" : "checkintime_desc";
             ViewBag.ParkingTimeSortParm = sortOrder == "parkingtime_desc" ? "parkingtime_asc" : "parkingtime_desc";
+            ViewBag.SlotNoSortParm = sortOrder == "slotno_desc" ? "slotno_asc" : "slotno_desc";
             ViewBag.SearchString = searchString;
 
             var vehicle = from v in db.Vehicles
@@ -140,6 +141,12 @@ namespace Garage2.Controllers
                     break;
                 case "parkingtime_asc":
                     vehicle = vehicle.OrderBy(v => v.CheckInTime);
+                    break;
+                case "slotno_desc":
+                    vehicle = vehicle.OrderByDescending(v => v.ParkNr);
+                    break;
+                case "slotno_asc":
+                    vehicle = vehicle.OrderBy(v => v.ParkNr);
                     break;
 
                 default:

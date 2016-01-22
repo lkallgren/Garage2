@@ -36,6 +36,9 @@
         <th>
             @Html.ActionLink("ParkingTime", "Index", new { sortOrder = ViewBag.ParkingTimeSortParm, searchString = ViewBag.SearchString })
         </th>
+        <th>
+            @Html.ActionLink("SlotNo", "Index", new { sortOrder = ViewBag.SlotNoSortParm, searchString = ViewBag.SearchString })
+        </th>
 
         <th></th>
     </tr>
@@ -71,7 +74,9 @@
             @Html.DisplayFor(modelItem => result )
           
         </td>
-
+        <td>
+            @Html.DisplayFor(modelItem => item.ParkNr)
+        </td>
         <td>
             @*@Html.ActionLink("Search", "Edit", new { id = item.Id }) |*@
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
