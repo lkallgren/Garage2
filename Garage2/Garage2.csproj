@@ -128,6 +128,7 @@
       <DependentUpon>201601181124556_NewInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Garage.cs" />
     <Compile Include="Models\Garage2Context.cs" />
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Controllers\VehiclesController.cs" />

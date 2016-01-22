@@ -13,8 +13,43 @@ namespace Garage2.Controllers
 {
     public class VehiclesController : Controller
     {
-        private Garage2Context db = new Garage2Context();
+        public Garage2Context db = new Garage2Context();
         private Vehicle tmpVehicle;
+
+        int AddToFirstEmptySpace(VType vType) // returnera första lediga plats med eventuella nödvändiga platser extra efter varandra
+        {
+            Garage gar = new Garage(1000);
+            var vehiclesParked = (from v in db.Vehicles
+                                 where v.ParkNr>0
+                          select v).ToList();
+
+            var vehiclesUnParked = (from v in db.Vehicles
+                                   where v.ParkNr<=0
+                          select v).ToList();
+
+
+
+            foreach (var veh in vehiclesParked)
+	        {
+              //  if (veh.ParkNr>0 && veh.ParkNr<=gar.Max)
+                    if (! gar.AddToParkNr(veh.ParkNr)) //om platsen redan finns !!??
+                        ;//veh.ParkNr=0; //går ju inte
+
+	        }
+            foreach (var veh in vehiclesUnParked)
+            {
+                int p = gar.Add();
+                if (p > 0)
+                {
+                    db.Vehicles.Where(v => v.Id == veh.Id).FirstOrDefault().ParkNr = (Int32)p;
+                    db.SaveChanges();
+                }
+
+            }
+            
+            return gar.Add();
+        }
+ 
 
         // GET: Vehicles
 
@@ -120,7 +155,7 @@ namespace Garage2.Controllers
             if (ModelState.IsValid)
             {
                 vehicle.CheckInTime = DateTime.Now;
-
+                vehicle.ParkNr = AddToFirstEmptySpace(vehicle.Type);
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
 

@@ -29,5 +29,9 @@ namespace Garage2.Models
         [Range (0,9999)]
         public int Wheels { get; set; }
         public DateTime? CheckInTime { get; set; }
+ //       public int ParkSpace { get; set; }
+    
+        public int ParkNr { get; set; }
+
     }
 }
