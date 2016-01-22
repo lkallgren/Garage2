@@ -159,7 +159,7 @@ namespace Garage2.Controllers
                 db.Vehicles.Add(vehicle);
                 db.SaveChanges();
 
-                TempData["SetConfirmPark"] = "Your vehicle with RegNr: " + vehicle.RegNr + " is now parked in the garage.";
+                TempData["SetConfirmPark"] = "Your " + vehicle.Type + " with regnr: " + vehicle.RegNr + " is now parked in the garage.";
 
                 return RedirectToAction("Create");     // Ändrades till "Create" för att skapa loopen.
             }
@@ -198,11 +198,11 @@ namespace Garage2.Controllers
             db.SaveChanges();
 
 
-            return RedirectToAction("Receipe", vehicle);
+            return RedirectToAction("Receipt", vehicle);
             
         }
 
-        public ActionResult Receipe(Vehicle vehicle)
+        public ActionResult Receipt(Vehicle vehicle)
         { 
 
             DateTime CheckOutTime = DateTime.Now;
